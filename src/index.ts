@@ -2,14 +2,20 @@ import { Client } from "@notionhq/client";
 import dotenv from "dotenv";
 import jsforce from "jsforce";
 
+
+// Loads .env file contents into process.env.
 dotenv.config();
 
-const databaseId = "FIXME";
 
+// Initialising a new notion client to be able to work conveniently with the API
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
+const databaseId = "FIXME";
+
+// I've moved a new item addition process into a separate func.
+// so it will be easier to navigate throughout the code
 async function addItem(
   firstName: string,
   lastName: string,
@@ -62,7 +68,8 @@ async function addItem(
   }
 }
 
-const username = "a.rymarchuk@job.com";
+// Replace all the process.env variables with your data
+const username = process.env.SALESFORCE_USERNAME;
 const password = process.env.SALESFORCE_PASSWORD;
 const securityToken = process.env.SALESFORCE_TOKEN;
 
@@ -72,17 +79,21 @@ const conn = new jsforce.Connection({ loginUrl });
 
 async function subscribeToLeadUpdates(): Promise<void> {
   try {
-    await conn.login(username, password || '' + securityToken);
+    // We're using login method to, obviously, login into the salesforce
+    await conn.login(username || '', password || '' + securityToken || '');
     console.log("Logged in to Salesforce as: " + username);
 
+    // streaming method here used to establish connection with the streaming API
     const channel = conn.streaming.topic("/topic/LeadChanges");
+
+    // Long story short - subscripe method used here to subscribe to the changes of a Lead object
     channel.subscribe((message) => {
       console.log("Received message: " + JSON.stringify(message));
       const { sobject } = message;
       console.log(
         `New Lead created: ${sobject.FirstName} ${sobject.LastName} (${sobject.Email})`
       );
-      addItem(String(sobject.FirstName), String(sobject.LastName), String(sobject.Email), String(sobject.Id));
+      addItem(sobject.FirstName, sobject.LastName, sobject.Email, sobject.Id);
     });
   } catch (err) {
     console.error("Salesforce login failed: " + err);
