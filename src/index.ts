@@ -4,7 +4,7 @@ import jsforce from "jsforce";
 
 dotenv.config();
 
-const databaseId = "38190f8a86fc425db8b26a9d9689e7c8";
+const databaseId = "FIXME";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,

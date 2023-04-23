@@ -1,10 +1,6 @@
-# notion-sdk-typescript-starter
+# Salesforce-to-Notion integration
 
-This is a template repository for getting started with the [Notion SDK](https://github.com/makenotion/notion-sdk-js)
-and [TypeScript](https://www.typescriptlang.org/).
-
-To use this template, click the big green "Use this template" button in the upper-right corner. After some questions,
-GitHub will create a new clone under your account, and then you can get started customizing.
+  This small integration will allow you to have all the new Leads from your Salesforce org in your Notion database in a matter of a second! 
 
 ## Features
 
@@ -13,18 +9,19 @@ GitHub will create a new clone under your account, and then you can get started 
 - A minimal GitHub Actions workflow that typechecks your code.
 - [Dotenv](https://www.npmjs.com/package/dotenv) for configuring your Notion API token.
 - [Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates)
-  for ensuring your (and this template's!) dependencies are up to date.
-- Our lovely Notion SDK!
+  for ensuring your (and this repos) dependencies are up to date.
+- Lovely Notion SDK!
+- jsforce to subscribe to a Salesforce Streaming API.
 
 ## What to do after duplicating
 
 1. Make sure you've [created a Notion integration](https://developers.notion.com/docs/getting-started) and have a secret Notion token.
-2. Add your Notion token to a `.env` file at the root of this repository: `echo "NOTION_TOKEN=[your token here]" > .env`.
-3. Run `npm install`.
-4. Edit the `database_id` in `index.ts` from FIXME to be any database currently shared with your integration.
-5. Run `npm start` to run the script.
-
-Now you can head over to our [developer documentation](https://developers.notion.com/) for more information on using the Notion API!
+2. Make sure you've an Apex trigger or PushTopic in your Salesforce org enabled and setted up to fire when a new Lead is created.
+3. Add your Notion token to a `.env` file at the root of this repository: `echo "NOTION_TOKEN=[your token here]" > .env`
+  (don't forget to add salesforce password and token too).
+4. Run `npm install`.
+5. Edit the `database_id` in `index.ts` from FIXME to be any database currently shared with your integration.
+6. Run `npm start` to run the script.
 
 ## NPM Scripts
 
