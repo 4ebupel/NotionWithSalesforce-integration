@@ -1,6 +1,7 @@
 # Salesforce-to-Notion integration
 
   This small integration will allow you to have all the new Leads from your Salesforce org in your Notion database in a matter of a second! 
+  [![Watch the video](https://img.youtube.com/vi/kWF7QR4TrkU/hqdefault.jpg)](https://youtu.be/kWF7QR4TrkU)
 
 ## Features
 
